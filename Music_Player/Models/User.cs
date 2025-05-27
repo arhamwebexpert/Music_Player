@@ -9,7 +9,7 @@
         public string ProfilePictureUrl { get; set; }
         public List<Playlist> Playlists { get; set; } = new();
         public List<int> LikedSongs { get; set; } = new(); // List of song IDs
-        public string SessionToken { get; set; }
+        public string SessionToken { get; set; } = Guid.NewGuid().ToString();
 
     }
 

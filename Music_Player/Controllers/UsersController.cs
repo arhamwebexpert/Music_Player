@@ -134,7 +134,15 @@ namespace Music_Player.Controllers
                 return Unauthorized("Invalid credentials.");
             }
 
-            // Generate a simple session token
+            // Check if the user has a valid session token
+            if (!string.IsNullOrEmpty(user.SessionToken))
+            {
+                // Optionally reset the session token if it exists
+                user.SessionToken = null;
+                _context.SaveChanges();
+            }
+
+            // Generate new session token
             user.SessionToken = GenerateSessionToken();
             _context.SaveChanges();
 
@@ -150,11 +158,13 @@ namespace Music_Player.Controllers
                 return Unauthorized("Invalid session.");
             }
 
-            user.SessionToken = null; // Clear the session token
+            // Clear the session token in the database
+            user.SessionToken = null;
             _context.SaveChanges();
 
             return Ok("Logged out successfully.");
         }
+
 
         [HttpGet("profile")]
         public IActionResult GetUserProfile([FromHeader(Name = "Session-Token")] string sessionToken)
@@ -169,7 +179,7 @@ namespace Music_Player.Controllers
         }
 
         [HttpPost("{userId}/like-song")]
-        public IActionResult LikeSong([FromRoute] int userId, [FromBody] int songId, [FromHeader(Name = "Session-Token")] string sessionToken)
+        public IActionResult LikeSong([FromRoute] int userId, [FromBody] LikeSongRequest request, [FromHeader(Name = "Session-Token")] string sessionToken)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == userId && u.SessionToken == sessionToken);
             if (user == null)
@@ -177,14 +187,32 @@ namespace Music_Player.Controllers
                 return Unauthorized("Invalid session.");
             }
 
-            if (!user.LikedSongs.Contains(songId))
+            if (!user.LikedSongs.Contains(request.SongId))
             {
-                user.LikedSongs.Add(songId);
+                user.LikedSongs.Add(request.SongId);
                 _context.SaveChanges();
             }
 
             return Ok("Song added to liked songs.");
         }
+
+        [HttpGet("{userId}/liked-songs")]
+        public IActionResult GetLikedSongs(int userId, [FromHeader(Name = "Session-Token")] string sessionToken)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId && u.SessionToken == sessionToken);
+            if (user == null)
+            {
+                return Unauthorized("Invalid session.");
+            }
+
+            // Get the list of liked songs by their IDs
+            var likedSongs = _context.Songs
+                .Where(song => user.LikedSongs.Contains(song.Id))
+                .ToList();
+
+            return Ok(likedSongs);
+        }
+
 
         private string GenerateSessionToken()
         {
@@ -202,5 +230,10 @@ namespace Music_Player.Controllers
         public string Email { get; set; }
         public string Password { get; set; }
     }
+    public class LikeSongRequest
+    {
+        public int SongId { get; set; }
+    }
+
 
 }

@@ -1,0 +1,127 @@
+﻿/* card.css */
+
+/* Style for the card container */
+.card-style {
+    background-color: #2c2f38 !important; /* Dark background for the card */
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 10px; /* Reduced gap between cards */
+    margin-bottom: 15px; /* Reduced bottom margin */
+    width: 100%; /* Full width of the column */
+    height: 100%; /* To ensure uniform height */
+}
+
+/* Card hover effect */
+.card-style:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+/* Card title and text */
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* For card text (tracks and genre) */
+.card-text {
+    font-size: 0.9rem;
+    color: #fff !important; /* White color for the tracks and genre */
+}
+
+/* Card image and top corners */
+.card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    height: 200px; /* Fix the image size */
+    object-fit: cover; /* Crop the image to fit */
+}
+
+/* Buttons style */
+button {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+    color: white; /* White color for button text */
+}
+
+/* Button hover effect */
+button:hover {
+    transform: translateY(-3px);
+    background-color: #444; /* Darken the button color on hover */
+}
+
+/* Hover effect for the Play button */
+button:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .card-style {
+        width: 100%; /* Take full width on smaller screens */
+    }
+}
+
+/* Container for the cards - Flexbox layout for gaps between cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Reduced gap between cards */
+    justify-content: flex-start; /* Align cards to the left */
+}
+
+/* Play Button */
+button.play-btn {
+    color: #2ecc71; /* Green color for Play */
+}
+
+/* Add to Playlist Button */
+button.add-to-playlist-btn {
+    color: #3498db; /* Blue color for Add to Playlist */
+}
+
+/* Like Song Button */
+button.like-btn {
+    color: #e74c3c; /* Red color for Like Song */
+}
+
+/* Styling for the player controls */
+/* Update the player style for smaller height */
+.player {
+    background-color: #333;
+    padding: 5px 20px; /* Adjust padding */
+    color: #fff;
+    border-top: 1px solid #444;
+    height: 70px; /* Reduced height of the player */
+}
+
+    /* Ensure buttons and other elements inside the player adjust properly */
+    .player img {
+        width: 50px; /* Smaller image for album art */
+        height: 50px;
+    }
+
+    .player .btn {
+        height: 40px; /* Adjust button size */
+        width: 40px;
+    }
+
+    /* Adjust the progress bar inside the player */
+    .player .progress-bar {
+        height: 5px;
+    }
+
+/* Responsiveness for the player */
+@media (max-width: 768px) {
+    .player {
+        padding: 5px 10px;
+    }
+    .player img {
+        width: 50px;
+        height: 50px;
+    }
+}

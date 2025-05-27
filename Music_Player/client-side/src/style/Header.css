@@ -1,0 +1,61 @@
+﻿/* Adjust search bar */
+.search-bar {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 25px;
+    padding-left: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .search-bar:focus {
+        border-color: #1db954; /* Highlight the border on focus (example color) */
+        box-shadow: 0 0 5px rgba(29, 185, 84, 0.6);
+    }
+
+/* Style for the search results dropdown */
+.search-results-list {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    background-color: #2c2f38;
+    border: 1px solid #444;
+    border-radius: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Individual result item styling */
+.search-result-item {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #2c2f38;
+    color: #ddd; /* Light gray text */
+    border-radius: 3px;
+}
+
+    .search-result-item:hover {
+        background-color: #444;
+        color: white; /* White text on hover */
+    }
+
+/* Result text styling */
+.result-text {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .result-text strong {
+        font-weight: bold;
+    }
+
+    .result-text small {
+        color: #aaa;
+        font-size: 12px;
+    }
